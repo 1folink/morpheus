@@ -16,6 +16,7 @@ public class Job {
 	
 	private String description;
 	
+	// TODO : Join table
 	private List<JobRequirement> requirements;
 
 	public long getId() {

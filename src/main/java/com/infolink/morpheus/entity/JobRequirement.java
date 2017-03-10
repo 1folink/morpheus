@@ -12,6 +12,7 @@ public class JobRequirement {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	// TODO : Join table
 	private SkillCategory skill;
 	
 	private Integer level;

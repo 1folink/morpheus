@@ -6,9 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class SkillCategory {
+@Table(name="category")
+public class Category {
 
 	
 	@Id
@@ -21,10 +26,12 @@ public class SkillCategory {
 	
 	private Integer priority;
 	
-	private SkillCategory parent;
-	
-	// TODO : reflective join id/parent
-	private List<SkillCategory> childs;
+	@ManyToOne
+	@JoinColumn(name="parent")
+	private Category parent;
+	  
+	@OneToMany(mappedBy="parent")
+	private List<Category> children;
 
 	public long getId() {
 		return id;
@@ -58,20 +65,20 @@ public class SkillCategory {
 		this.priority = priority;
 	}
 
-	public SkillCategory getParent() {
+	public Category getParent() {
 		return parent;
 	}
 
-	public void setParent(SkillCategory parent) {
+	public void setParent(Category parent) {
 		this.parent = parent;
 	}
 
-	public List<SkillCategory> getChilds() {
-		return childs;
+	public List<Category> getChildren() {
+		return children;
 	}
 
-	public void setChilds(List<SkillCategory> childs) {
-		this.childs = childs;
+	public void setChildren(List<Category> children) {
+		this.children = children;
 	}
 	
 	

@@ -2,14 +2,21 @@ package com.infolink.morpheus.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
 
 @Entity
+@Table(name="person")
 public class Person {
 
 	@Id
@@ -27,10 +34,11 @@ public class Person {
 	
 	private String office;
 	
-	// TODO : Join table
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "job_person", joinColumns = @JoinColumn(name = "job_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"))
 	private List<Job> jobs;
 	
-	// TODO : Join table
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
 	private List<Skill> skills;
 
 	public long getId() {

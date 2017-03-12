@@ -1,34 +1,34 @@
 package com.infolink.morpheus.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="skill")
-public class Skill {
+@Table(name="requirement")
+public class Requirement {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="category", nullable=true)
-	private Category category;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "category_requirement", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "requirement_id", referencedColumnName = "id"))
+	private List<Category> categories;
 	
 	private Integer level;
 	
 	private Integer years;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="person", nullable=true)
-	private Person person;
-	
 	public long getId() {
 		return id;
 	}
@@ -37,12 +37,12 @@ public class Skill {
 		this.id = id;
 	}
 
-	public Category getCategory() {
-		return category;
+	public List<Category> getCategories() {
+		return categories;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 	
 	public Integer getLevel() {
@@ -59,14 +59,6 @@ public class Skill {
 
 	public void setYears(Integer years) {
 		this.years = years;
-	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
 	}
 	
 	

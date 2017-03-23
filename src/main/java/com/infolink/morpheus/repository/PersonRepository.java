@@ -11,7 +11,7 @@ import com.infolink.morpheus.entity.Person;
 @RepositoryRestResource(collectionResourceRel = "person", path = "person")
 public interface PersonRepository extends PagingAndSortingRepository<Person, Long> {
 
-	List<Person> findByLastName(@Param("name") String name);
+	List<Person> findByLastName(@Param("lastName") String lastName);
 	List<Person> findByFirstName(@Param("firstname") String firstname);
 
 }

@@ -87,7 +87,7 @@ public class ApplicationTests {
 						status().isCreated());
 
 		mockMvc.perform(
-				get("/person/search/findByLastName?name={name}", "Baggins")).andExpect(
+				get("/person/search/findByLastName?lastName={lastName}", "Baggins")).andExpect(
 						status().isOk()).andExpect(
 								jsonPath("$._embedded.person[0].firstName").value(
 										"Frodo"));
